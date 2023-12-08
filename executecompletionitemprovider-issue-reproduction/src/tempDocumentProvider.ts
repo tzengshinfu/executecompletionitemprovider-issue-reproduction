@@ -18,8 +18,9 @@ export default class TempDocumentProvider {
     const originalFilepaths = editor.document.uri.fsPath
       .toString()
       .split(path.sep);
-    originalFilepaths[originalFilepaths.length - 1] = ("." +
-      originalFilepaths[originalFilepaths.length - 1]) as string;
+    const originalFileName = originalFilepaths[originalFilepaths.length - 1] as string;
+    const tempDocumentFileName = "." + originalFileName.split(".")[0] + "-" + new Date().getTime() + ".java";
+    originalFilepaths[originalFilepaths.length - 1] = tempDocumentFileName;
 
     const tempDocumentFilePath = originalFilepaths.join(path.sep);
     const tempDocumentFileContent =
